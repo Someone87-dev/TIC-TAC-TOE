@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flappy Bird</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Splash Screen -->
+    <div class="splash-screen" id="splashScreen">
+        <div class="splash-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-text">
+                        <span class="text-flappy">Flappy</span>
+                        <span class="text-bird">Bird</span>
+                    </div>
+                </div>
+            </div>
+            <div class="loading-bar">
+                <div class="loading-progress"></div>
+            </div>
+            <p class="loading-text">Loading...</p>
+        </div>
+    </div>
+
+    <!-- Add this near the top of body, after the splash screen -->
+    <div class="theme-switch-wrapper">
+        <label class="theme-switch">
+            <input type="checkbox" id="themeToggle">
+            <div class="slider round">
+                <span class="sun">☀️</span>
+                <span class="moon">🌜🌛</span>
+            </div>
+        </label>
+    </div>
+
+    <!-- Homepage -->
+    <div class="homepage" id="homepage">
+        <div class="homepage-content">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-text">
+                        <span class="text-flappy">Flappy</span>
+                        <span class="text-bird">Bird</span>
+                    </div>
+                </div>
+            </div>
+            
+            <h1 class="game-title">Flappy Bird</h1>
+            
+            <div class="menu-options">
+                <button class="menu-btn play-btn" id="playButton">
+                    <span class="btn-icon">▶</span>
+                    Play Now
+                </button>
+                <button class="menu-btn how-to-btn" id="howToButton">
+                    <span class="btn-icon">❓</span>
+                    How to Play
+                </button>
+                <button class="menu-btn settings-btn" id="settingsButton">
+                    <span class="btn-icon">⚙️</span>
+                    Settings
+                </button>
+            </div>
+
+            <div class="quick-tips">
+                <h3>Quick Tips</h3>
+                <ul>
+                    <li>Press SPACE or click to fly</li>
+                    <li>Avoid the green pipes</li>
+                    <li>Try to beat your high score!</li>
+                </ul>
+            </div>
+
+            <footer class="homepage-footer">
+                <p>Made with ❤️ in INDIA</p>
+                <p class="version">Version 1.0</p>
+            </footer>
+        </div>
+    </div>
+
+    <!-- Game Container -->
+    <div class="container" id="gameContainer" style="display: none;">
+        <div class="game-container">
+            <button id="backButton" class="back-button">
+                <div class="back-button-content">
+                    <span class="back-icon">←</span>
+                    <span class="back-text">MENU</span>
+                </div>
+                <div class="button-background"></div>
+            </button>
+            <canvas id="gameCanvas"></canvas>
+            <div class="menu" id="menu">
+                <h1>Flappy Bird</h1>
+                <p>Score: <span id="score">0</span></p>
+                <p>High Score: <span id="highScore">0</span></p>
+                <button id="startButton">Start Game</button>
+            </div>
+        </div>
+    </div>
+    
+    <!-- How to Play Modal -->
+    <div class="modal" id="howToModal">
+        <div class="modal-content">
+            <h2>How to Play</h2>
+            <div class="instructions">
+                <p>1. Press SPACE or click to make the bird fly</p>
+                <p>2. Avoid hitting the pipes</p>
+                <p>3. Score points by passing through pipes</p>
+            </div>
+            <button class="close-modal" id="closeHowTo">Got it!</button>
+        </div>
+    </div>
+
+    <!-- Settings Modal -->
+    <div class="modal" id="settingsModal">
+        <div class="modal-content">
+            <h2>Settings</h2>
+            <div class="settings-options">
+                <div class="setting-item">
+                    <label for="gameSpeed">Game Speed:</label>
+                    <input type="range" id="gameSpeed" min="0.5" max="2" step="0.1" value="1">
+                    <span id="speedValue">1x</span>
+                </div>
+                <div class="setting-item">
+                    <label for="birdColor">Bird Color:</label>
+                    <input type="color" id="birdColor" value="#FFD700">
+                </div>
+                <div class="setting-item">
+                    <label for="pipeColor">Pipe Color:</label>
+                    <input type="color" id="pipeColor" value="#2ECC71">
+                </div>
+            </div>
+            <button class="close-modal" id="closeSettings">Save</button>
+        </div>
+    </div>
+
+    <!-- Add this temporary bird image for testing -->
+    <img id="birdSprite" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAALEwAACxMBAJqcGAAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAGxSURBVFiF7ZY9SAJxGMafMwsyIiiCaAgaGiIoaG2ICKKhpSFoaO0jh+YamnJraDChqSGiJYKGoKEhaAiixVyK0iDqIBEVO0/U0+9OhT5O75R7h94HjuP9eJ//c/e+7/0rICKBZJQAKAC+AFgB5AKIAogAuAEQBhAFEDKZTJ+JRLLT6XR+ZBJAAdEbiB5BtEJEGhGVEFE5iGpAtAaiDRDtgugURLdEFCOi70wCvIPoHESHIKogIjURlYJIBVEliOpB1AyiLhCdg+gBRHEQxTMFEATRKYj2QFRFRCUgKgdRFYjqQNQEoncQXYAoAqJvpgHuQXQGoj0QVYOolIhUEFWCqA5EzSDqBNE5iO5AFGcS4A1EZyA6AFE1EZUQkQqiShDVg6gFRF0gOgPRLYh+mAZ4BNHR3wkQqSBSQVQHohYQdYPoFEQ3IPphEuANRKcgOgBRDRGpiKgCRHUgagFRJ4hOQHQDoh8mAR5BdASiPRDVEFEpiCoSp98Coi4QnYDoGkQxJgFeQXQMoj0Q1YKonIgqQFQPojYQdYPoGERXIIoxCfAEoiMQ7YOojoiURFQJogYQtYOoB0SHILpkEuAXqpj1kXK8bZQAAAAASUVORK5CYII=" style="display: none;">
+
+    <!-- Add this inside your game container -->
+    <div id="gameOverPopup" class="popup">
+        <div class="popup-content">
+            <h2>Game Over!</h2>
+            <p>Score: <span id="finalScore">0</span></p>
+            <p>High Score: <span id="highScore">0</span></p>
+            <div class="popup-buttons">
+                <button id="restartButton">Play Again</button>
+                <button id="menuButton">Main Menu</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html> 

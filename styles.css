@@ -1,0 +1,785 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background: linear-gradient(to bottom, #87CEEB, #E0F6FF);
+    font-family: 'Arial', sans-serif;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.container {
+    width: 100%;
+    max-width: 800px;
+    padding: 20px;
+}
+
+.game-container {
+    position: relative;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+canvas {
+    display: block;
+    width: 100%;
+    background-color: #70C5CE;
+}
+
+.menu {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+button {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 10px;
+    transition: background-color 0.3s;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 10px;
+}
+
+p {
+    color: #666;
+    margin: 5px 0;
+}
+
+/* Splash Screen */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #4dc1ff; /* Light blue background matching your image */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+.splash-content {
+    text-align: center;
+}
+
+.splash-content .logo-container {
+    margin-bottom: 30px;
+}
+
+.splash-content .bird-logo {
+    width: 150px;
+    height: auto;
+    margin-bottom: 10px;
+    animation: float 2s ease-in-out infinite;
+}
+
+.splash-content .logo-text {
+    font-family: 'Press Start 2P', cursive;
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    font-size: 2em;
+    margin-bottom: 20px;
+}
+
+/* Ensure you have the loading bar styles */
+.loading-bar {
+    width: 200px;
+    height: 10px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 5px;
+    margin: 20px auto;
+    overflow: hidden;
+}
+
+.loading-progress {
+    width: 100%;
+    height: 100%;
+    background: white;
+    animation: loading 3s linear;
+    transform-origin: left;
+}
+
+.loading-text {
+    color: white;
+    font-family: 'Press Start 2P', cursive;
+    font-size: 16px;
+    margin-top: 10px;
+}
+
+/* Homepage */
+.homepage {
+    background: linear-gradient(to bottom, #4dc1ff, #87CEEB);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.homepage-content {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    width: 90%;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.homepage-logo {
+    width: 200px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.game-title {
+    font-size: 2.5em;
+    color: #333;
+    margin-bottom: 30px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.menu-options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 30px;
+}
+
+.menu-btn {
+    padding: 15px 30px;
+    font-size: 1.2em;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s, box-shadow 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.menu-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.play-btn {
+    background: #4CAF50;
+    color: white;
+}
+
+.how-to-btn {
+    background: #2196F3;
+    color: white;
+}
+
+.settings-btn {
+    background: #FF9800;
+    color: white;
+}
+
+.btn-icon {
+    font-size: 1.2em;
+}
+
+.stats-container {
+    background: #f5f5f5;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.stats-container h2 {
+    color: #333;
+    margin-bottom: 15px;
+}
+
+.stats {
+    display: flex;
+    justify-content: space-around;
+    gap: 20px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.stat-icon {
+    font-size: 1.5em;
+}
+
+.stat-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+.stat-label {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.stat-value {
+    font-size: 1.2em;
+    font-weight: bold;
+    color: #333;
+}
+
+.quick-tips {
+    background: #fff3e0;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+.quick-tips h3 {
+    color: #f57c00;
+    margin-bottom: 10px;
+}
+
+.quick-tips ul {
+    list-style: none;
+    padding: 0;
+    text-align: left;
+    margin: 0;
+}
+
+.quick-tips li {
+    padding: 5px 0;
+    color: #666;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.quick-tips li::before {
+    content: "→";
+    margin-right: 10px;
+    color: #f57c00;
+}
+
+.homepage-footer {
+    color: #666;
+    font-size: 0.9em;
+    margin-top: 20px;
+}
+
+.version {
+    color: #999;
+    font-size: 0.8em;
+    margin-top: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 480px) {
+    .homepage-content {
+        padding: 20px;
+    }
+
+    .game-title {
+        font-size: 2em;
+    }
+
+    .menu-btn {
+        padding: 12px 24px;
+        font-size: 1em;
+    }
+
+    .stats {
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
+/* Animations */
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-15px);
+    }
+}
+
+@keyframes loading {
+    from {
+        transform: scaleX(0);
+    }
+    to {
+        transform: scaleX(1);
+    }
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Modal */
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    text-align: center;
+    max-width: 400px;
+    width: 90%;
+}
+
+.instructions {
+    margin: 20px 0;
+    text-align: left;
+}
+
+.close-modal {
+    padding: 10px 20px;
+    background: #70c5ce;
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+}
+
+.setting-item {
+    margin: 15px 0;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.setting-item label {
+    font-size: 16px;
+    min-width: 100px;
+}
+
+.setting-item input[type="range"] {
+    width: 150px;
+}
+
+.setting-item input[type="color"] {
+    width: 50px;
+    height: 30px;
+    padding: 0;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+#speedValue {
+    min-width: 30px;
+}
+
+/* Theme Variables */
+:root {
+    /* Light theme (default) */
+    --primary-bg: #4dc1ff;
+    --secondary-bg: #87CEEB;
+    --container-bg: rgba(255, 255, 255, 0.95);
+    --text-color: #333;
+    --menu-bg: #f5f5f5;
+    --button-bg: #4CAF50;
+    --button-text: white;
+    --modal-bg: white;
+    --tips-bg: #fff3e0;
+    --logo-text-primary: #FFD700;
+    --logo-text-secondary: #4CAF50;
+    --logo-shadow-color: rgba(0, 0, 0, 0.2);
+}
+
+[data-theme="dark"] {
+    /* Dark theme */
+    --primary-bg: #1a1a1a;
+    --secondary-bg: #2c3e50;
+    --container-bg: rgba(40, 44, 52, 0.95);
+    --text-color: #ecf0f1;
+    --menu-bg: #2c3e50;
+    --button-bg: #3498db;
+    --button-text: #ecf0f1;
+    --modal-bg: #34495e;
+    --tips-bg: #2c3e50;
+    --logo-text-primary: #FFC107;
+    --logo-text-secondary: #66BB6A;
+    --logo-shadow-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Apply theme colors */
+body {
+    color: var(--text-color);
+    background-color: var(--primary-bg);
+}
+
+.homepage {
+    background: linear-gradient(to bottom, var(--primary-bg), var(--secondary-bg));
+}
+
+.homepage-content {
+    background: var(--container-bg);
+    color: var(--text-color);
+}
+
+.menu-btn {
+    background: var(--button-bg);
+    color: var(--button-text);
+}
+
+.stats-container {
+    background: var(--menu-bg);
+    color: var(--text-color);
+}
+
+.quick-tips {
+    background: var(--tips-bg);
+    color: var(--text-color);
+}
+
+.modal {
+    background: var(--modal-bg);
+    color: var(--text-color);
+}
+
+/* Theme Switch Styles */
+.theme-switch-wrapper {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    z-index: 999;
+}
+
+.theme-switch {
+    display: inline-block;
+    position: relative;
+    width: 60px;
+    height: 34px;
+}
+
+.theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .4s;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 26px;
+    width: 26px;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+    z-index: 2;
+}
+
+.slider.round {
+    border-radius: 34px;
+}
+
+.slider.round:before {
+    border-radius: 50%;
+}
+
+input:checked + .slider {
+    background-color: #2c3e50;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.sun, .moon {
+    font-size: 16px;
+    line-height: 1;
+    z-index: 1;
+}
+
+/* Enhanced Back Button Styles */
+.back-button {
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    padding: 0;
+    border: none;
+    background: none;
+    cursor: pointer;
+    z-index: 100;
+    overflow: hidden;
+}
+
+.back-button-content {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 24px;
+    color: var(--button-text);
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    z-index: 2;
+}
+
+.button-background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--button-bg);
+    border-radius: 25px;
+    transition: all 0.3s ease;
+    z-index: 1;
+}
+
+.back-button:hover .button-background {
+    background: var(--button-hover);
+    transform: scale(1.05);
+}
+
+.back-button:hover .back-button-content {
+    color: var(--button-text-hover);
+}
+
+.back-icon {
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.back-button:hover .back-icon {
+    transform: translateX(-3px);
+}
+
+.back-text {
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* Logo Styles */
+.logo-container {
+    position: relative;
+    margin-bottom: 40px;
+    perspective: 1000px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.text-flappy {
+    display: block;
+    font-size: 3em;
+    color: #FFD700;
+    text-shadow: 
+        2px 2px 0 #FF6B6B,
+        -2px -2px 0 #FF6B6B,
+        2px -2px 0 #FF6B6B,
+        -2px 2px 0 #FF6B6B;
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.text-bird {
+    display: block;
+    font-size: 3.5em;
+    color: #4CAF50;
+    text-shadow: 
+        2px 2px 0 #2E7D32,
+        -2px -2px 0 #2E7D32,
+        2px -2px 0 #2E7D32,
+        -2px 2px 0 #2E7D32;
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.logo-shadow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    filter: blur(4px);
+    animation: shadow 3s ease-in-out infinite;
+}
+
+@keyframes shadow {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translateX(-50%) scale(0.8);
+        opacity: 0.1;
+    }
+}
+
+/* Remove all possible underlines and borders */
+img, a, span, div {
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+
+.logo img {
+    border: none !important;
+    text-decoration: none !important;
+    max-width: 100%;
+    height: auto;
+}
+
+.logo-container {
+    position: relative;
+    margin-bottom: 40px;
+    perspective: 1000px;
+}
+
+.logo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    animation: float 3s ease-in-out infinite;
+}
+
+.logo-text {
+    font-family: 'Press Start 2P', cursive;
+    text-align: center;
+    line-height: 1.5;
+}
+
+.text-flappy {
+    display: block;
+    font-size: 3em;
+    color: #FFD700;
+    text-shadow: 
+        2px 2px 0 #FF6B6B,
+        -2px -2px 0 #FF6B6B,
+        2px -2px 0 #FF6B6B,
+        -2px 2px 0 #FF6B6B;
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.text-bird {
+    display: block;
+    font-size: 3.5em;
+    color: #4CAF50;
+    text-shadow: 
+        2px 2px 0 #2E7D32,
+        -2px -2px 0 #2E7D32,
+        2px -2px 0 #2E7D32,
+        -2px 2px 0 #2E7D32;
+    text-decoration: none !important;
+    border-bottom: none !important;
+}
+
+.logo-shadow {
+    position: absolute;
+    bottom: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 10px;
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 50%;
+    filter: blur(4px);
+    animation: shadow 3s ease-in-out infinite;
+}
+
+@keyframes shadow {
+    0%, 100% {
+        transform: translateX(-50%) scale(1);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translateX(-50%) scale(0.8);
+        opacity: 0.1;
+    }
+}
+
+/* Remove all possible underlines and borders */
+img, a, span, div {
+    text-decoration: none !important;
+    border: none !important;
+    border-bottom: none !important;
+    outline: none !important;
+}
+
+.logo img {
+    border: none !important;
+    text-decoration: none !important;
+    max-width: 100%;
+    height: auto;
+} 
